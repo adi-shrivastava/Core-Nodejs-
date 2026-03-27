@@ -77,7 +77,7 @@ router.put("/:id",async(req,res)=>{
     }
     catch{
         res.status(500).json({error:"Internal server error"});
-        console.log("Updation Failed due to Internal Server Error")
+        console.log("Updation Failed")
     }
 })
 router.delete("/:id",async(req,res)=>{
