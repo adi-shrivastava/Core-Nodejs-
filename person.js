@@ -37,12 +37,21 @@ personSchema.pre("save",async function(next){
         const hashedpassword=await bcrypt.hash(person.password,salt);
         //overwrite the existing password with hashed password
         person.password=hashedpassword;
-        next();
+       
     }
     catch(err){
-        return next(err);
+        throw err;
     }
 })
+personSchema.methods.comparepassword=async function(candidatePassword){
+    try{
+        const isMatch=await bcrypt.compare(candidatePassword,this.password);
+        return isMatch;
+    }
+    catch(err){
+        throw err;
+    }
+}
 //Model made
 const Person=mongoose.model("Person",personSchema);
 //Exported to server.js
