@@ -1,14 +1,18 @@
 const express=require("express");
 const router=express.Router();
 const Person=require("../person");
+const {jwtauthmiddleware,tokengeneration}=require("./../jwt");
 //post person data
-router.post("/",async(req,res)=>{
+router.post("/signup",async(req,res)=>{
     try{
         const data=req.body;
         const newperson= new Person(data); //Creating new person for sending to DB
         const savedperson=await newperson.save(); //Save to DB
         console.log("Data Saved!!")
-        res.status(200).json(savedperson); //Resonding with saved data
+        const token=generatetoken(response.username);
+        console.log("Generated Token : ",token);
+
+        res.status(200).json({response:response,token:token}); //Resonding with saved data
     }
     catch(err){
         console.log(err);

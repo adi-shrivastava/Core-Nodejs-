@@ -4,6 +4,8 @@ const db=require("./db");
 const Person=require("./person");
 const Menu=require("./menu");
 const passport=require("./auth");
+const require("dotenv").config();
+const {jwtauthmiddleware,tokengeneration}=require("./../jwt");
 
 const bodyParser=require("body-parser");
 app.use(bodyParser.json()) //req.body parser middleware
@@ -21,7 +23,7 @@ app.get("/",(req,res)=>{
 //Import person routes
 const personroutes=require("./routes/personroutes");
 //Use person routes with /person prefix for endpoints of person
-app.use("/person",localauthmiddleware,personroutes);
+app.use("/person",,personroutes);
 
 //Vice versa for menu routes
 const menuroutes=require("./routes/menuroutes");
