@@ -1,10 +1,10 @@
 const express=require('express');
 const router=express.Router();
 const jwt=require('jsonwebtoken');
-const Person=require('../person');
 //token verification middleware
 const jwtauthmiddleware=(req,res,next)=>{
-    const token=req.headers.authorization;
+    const token=req.headers.authorization.split(" ")[1];
+    console.log("Received Token : ",token);
     if(!token) return res.status(401).json({error:"Unauthorized"});
     try{
         const decoded=jwt.verify(token,process.env.JWT_SECRET);
@@ -17,7 +17,7 @@ const jwtauthmiddleware=(req,res,next)=>{
     }
 }
 //token generation
-const tokengeneration=(userdata)=>{
-    return jwt.sign(userdata,process.env.JWT_SECRET,{expiresIn:"20s"});
+const generatetoken=(userdata)=>{
+    return jwt.sign(userdata,process.env.JWT_SECRET,{expiresIn:"2000s"});
 }
-module.exports={jwtauthmiddleware,tokengeneration};
+module.exports={jwtauthmiddleware,generatetoken};
