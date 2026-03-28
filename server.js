@@ -4,7 +4,7 @@ const db=require("./db");
 const Person=require("./person");
 const Menu=require("./menu");
 const passport=require("./auth");
-const require("dotenv").config();
+
 const {jwtauthmiddleware,tokengeneration}=require("./../jwt");
 
 const bodyParser=require("body-parser");
